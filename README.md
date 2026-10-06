@@ -6,14 +6,15 @@
 [![JavaFX](https://img.shields.io/badge/JavaFX-21-EF476F?style=for-the-badge&logo=java&logoColor=white)](https://openjfx.io/)
 [![SQLite](https://img.shields.io/badge/SQLite-3-F9E076?style=for-the-badge&logo=sqlite&logoColor=000000)](https://sqlite.org/)
 [![Judges](https://img.shields.io/badge/Judges-C%2B%2B%20%7C%20Python-118AB2?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
-[![Theme](https://img.shields.io/badge/Aesthetic-Pop%20Art%20Retro-EF476F?style=for-the-badge)](#-pop-art-color-palette)
+[![Report](https://img.shields.io/badge/Report-PDF-EF476F?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](./project-report.pdf)
+[![Theme](https://img.shields.io/badge/Aesthetic-Pop%20Art%20Retro-F9E076?style=for-the-badge&labelColor=000000&color=F9E076)](#-pop-art-color-palette)
 
 <p align="center">
   <b>A high-octane, Pop-Art-styled desktop Online Judge and 20-minute survival challenge game.</b><br>
   Test your algorithmic problem-solving speed under pressure with instant verdicts, live audio-visual feedback, and embedded code editing.
 </p>
 
-[Key Features](#-key-features) • [Screenshots](#-screenshots--gameplay-flow) • [Color Palette](#-pop-art-color-palette) • [Architecture](#-architecture--design-patterns) • [Getting Started](#-getting-started)
+[Key Features](#-key-features) • [Screenshots](#-screenshots--gameplay-flow) • [Color Palette](#-pop-art-color-palette) • [Architecture](#-architecture--design-patterns) • [Project Report](#-project-report--documentation) • [Getting Started](#-getting-started)
 
 ---
 
@@ -141,6 +142,18 @@ src/main/java/com/example/joj2/
 - **Factory Pattern (`JudgeFactory`)**: Decouples language execution logic from the UI. Returns the appropriate `Judge` implementation (`CppJudge` or `PythonJudge`).
 - **Singleton Pattern (`Database`, `Dealer`, `RunTracker`)**: Ensures unified access to the SQLite connection, problem pool, and historical stats throughout the session.
 - **Asynchronous Execution & Platform Synchronization**: Code judging and process monitoring run on background daemon threads, reporting verdicts safely back to the JavaFX Application Thread via `Platform.runLater()`.
+---
+
+## 📑 Project Report & Documentation
+
+The complete academic project report is included in the repository: **[project-report.pdf](./project-report.pdf)**.
+
+### Summary of Report Highlights:
+- **Rogue-Like Gamification**: How the application treats competitive programming sessions as rogue-like "runs," utilizing the `Dealer` class to manage randomized decks of coding challenges.
+- **Software Architecture & Patterns**: In-depth rationale for employing the **Factory Pattern** (`JudgeFactory`) to support pluggable multi-language judging and **Singleton Patterns** (`Database`, `Dealer`, `RunTracker`) for consistent state management.
+- **Secure Sandboxed Execution**: Implementation of isolated temporary directories for process execution and automatic cleanup to safeguard host file systems during untrusted code testing.
+- **Crash-Proof Exception Handling**: Comprehensive strategy ensuring smooth user recovery from compilation crashes, process timeouts, and database connection interruptions without UI freezing.
+- **UML Diagrams**: Full structural specifications documented in [`class-diagram.md`](./class-diagram.md) and [`class-diagram-plantuml.md`](./class-diagram-plantuml.md).
 
 ---
 
