@@ -1,0 +1,55 @@
+# Compiled class files & build artifacts
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Databases (runtime SQLite databases)
+*.db
+*.sqlite
+*.sqlite3
+# Retain the compressed initial database archive
+!joj.db.gz
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# VS Code
+.vscode/
+
+# Python virtual environment & cache (used in populate_db)
+.venv/
+*/.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 3rd-party cloned repos in populate_db
+populate_db/CSES-Solutions/
+populate_db/CSES-in-Python/
+
+# OS specific
+.DS_Store
+Thumbs.db
