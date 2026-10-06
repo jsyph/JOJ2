@@ -23,13 +23,13 @@
 
 The interface is inspired by classic Pop Art & comic book aesthetics, featuring high-contrast borders, punchy saturated primaries, and retro visual accents:
 
-| Color Sample | Name | Hex Code | Role in UI |
+| Swatch | Name | Hex Code | Role in UI |
 | :---: | :--- | :--- | :--- |
-| <img src="https://via.placeholder.com/20/F9E076/000000?text=+" width="20" height="20" /> | **Pop Yellow** | `#F9E076` | Stats display tables, hint modals, bottom control bar, score banners |
-| <img src="https://via.placeholder.com/20/EF476F/000000?text=+" width="20" height="20" /> | **Pop Magenta** | `#EF476F` | Game-over titles, hint action buttons, problem statement title underline |
-| <img src="https://via.placeholder.com/20/118AB2/000000?text=+" width="20" height="20" /> | **Pop Cyan** | `#118AB2` | Top arena status bar, countdown window border, submit button, problem headers |
-| <img src="https://via.placeholder.com/20/FDFFFC/000000?text=+" width="20" height="20" /> | **Pop White** | `#FDFFFC` | Canvas background, workspace padding, and high-readability text |
-| <img src="https://via.placeholder.com/20/000000/000000?text=+" width="20" height="20" /> | **Comic Black** | `#000000` | Heavy 3px–5px comic borders, secondary buttons, and countdown arena |
+| <img src=".github/images/colors/yellow.png" width="22" height="22" alt="Pop Yellow" /> | **Pop Yellow** | `#F9E076` | Stats display tables, hint modals, bottom control bar, score banners |
+| <img src=".github/images/colors/magenta.png" width="22" height="22" alt="Pop Magenta" /> | **Pop Magenta** | `#EF476F` | Game-over titles, hint action buttons, problem statement title underline |
+| <img src=".github/images/colors/cyan.png" width="22" height="22" alt="Pop Cyan" /> | **Pop Cyan** | `#118AB2` | Top arena status bar, countdown window border, submit button, problem headers |
+| <img src=".github/images/colors/white.png" width="22" height="22" alt="Pop White" /> | **Pop White** | `#FDFFFC` | Canvas background, workspace padding, and high-readability text |
+| <img src=".github/images/colors/black.png" width="22" height="22" alt="Comic Black" /> | **Comic Black** | `#000000` | Heavy 3px–5px comic borders, secondary buttons, and countdown arena |
 
 ---
 
