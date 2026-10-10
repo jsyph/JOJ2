@@ -90,10 +90,10 @@
 - ⏱️ **20-Minute Survival Challenge**: Race against a ticking clock to solve algorithmic problems consecutively. Each accepted solution rewards `+100` score points.
 
 - ⚡ **Multi-Language Judging Engine**:
+
   - **C++ (GCC/g++)**: Automatic compilation and execution with strict time and memory limits.
   - **Python 3**: Native execution with input/output pipe streaming.
   - **Verdict Lifecycle**: Real-time status updates (`ENQUEUED` ➔ `COMPILING` ➔ `TESTING` ➔ `ACCEPTED` / `WRONG ANSWER` / `TIME LIMIT EXCEEDED` / `RUNTIME ERROR` / `COMPILE ERROR`).
-
 - 📝 **Embedded Ace Code Editor**: Integrated Monaco/Ace Editor via JavaFX WebView with full syntax highlighting, line numbers, and instant C++ / Python mode switching.
 
 - 📐 **MathJax 3 Formula Rendering**: Problem statements render beautiful LaTeX formulas and mathematical constraints ($2 \le n \le 2 \cdot 10^5$) natively in HTML.
@@ -123,3 +123,118 @@ The interface is inspired by classic Pop Art & comic book aesthetics, featuring 
 ## 🏛️ Architecture & Design Patterns
 
 The project follows clean object-oriented principles:
+
+```
+src/main/java/com/example/joj2/
+├── Launcher.java            # App bootstrapper (DB init & problem dealer shuffle)
+├── JOJ.java                 # JavaFX GUI, event loops, WebViews, timer, and styling
+├── Dealer.java              # Singleton managing problem rotation and shuffling
+├── Database.java            # SQLite connection, schema migration & auto-unzipping
+├── RunTracker.java          # Persistent run statistics & distinct problem solver metrics
+├── Problem.java             # Problem domain model (statement, limits, testcases)
+├── TestCase.java            # Input / Expected Output pairs
+├── Solution.java            # Stored reference solutions
+├── Submission.java          # User submission entity
+├── SubmissionStatus.java    # Enqueued, Compiling, Testing, Finished
+├── SubmissionVerdict.java   # Accepted, WrongAnswer, TimeLimitExceeded, etc.
+├── Language.java            # Enum for Cpp and Python
+├── Judge.java               # Core judging interface
+├── CppJudge.java            # g++ compilation and execution runner
+├── PythonJudge.java         # Python3 process execution runner
+└── JudgeFactory.java        # Factory pattern: instantiates language-specific judges
+```
+
+### Key Design Patterns
+- **Factory Pattern (`JudgeFactory`)**: Decouples language execution logic from the UI. Returns the appropriate `Judge` implementation (`CppJudge` or `PythonJudge`).
+
+- **Singleton Pattern (`Database`, `Dealer`, `RunTracker`)**: Ensures unified access to the SQLite connection, problem pool, and historical stats throughout the session.
+
+- **Asynchronous Execution & Platform Synchronization**: Code judging and process monitoring run on background daemon threads, reporting verdicts safely back to the JavaFX Application Thread via `Platform.runLater()`.
+
+---
+
+## 📑 Project Report & Documentation
+
+The complete academic project report is included in the repository: **[project-report.pdf](./project-report.pdf)**.
+
+### Summary of Report Highlights:
+- **Rogue-Like Gamification**: How the application treats competitive programming sessions as rogue-like "runs," utilizing the `Dealer` class to manage randomized decks of coding challenges.
+
+- **Software Architecture & Patterns**: In-depth rationale for employing the **Factory Pattern** (`JudgeFactory`) to support pluggable multi-language judging and **Singleton Patterns** (`Database`, `Dealer`, `RunTracker`) for consistent state management.
+
+- **Secure Sandboxed Execution**: Implementation of isolated temporary directories for process execution and automatic cleanup to safeguard host file systems during untrusted code testing.
+
+- **Crash-Proof Exception Handling**: Comprehensive strategy ensuring smooth user recovery from compilation crashes, process timeouts, and database connection interruptions without UI freezing.
+
+- **UML Diagrams**: Full structural specifications documented in [`class-diagram.md`](./class-diagram.md) and [`class-diagram-plantuml.md`](./class-diagram-plantuml.md).
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+
+1. **Java 21 or higher** (with JavaFX support, such as [BellSoft Liberica Full JDK 21](https://bell-sw.com/pages/downloads/) or OpenJDK 21 + JavaFX SDK).
+
+2. **C++ Compiler (`g++`)**: Required for judging C++ submissions.
+   ```bash
+   # Debian / Ubuntu
+   sudo apt install build-essential
+
+   # Arch Linux
+   sudo pacman -S gcc
+
+   # macOS (Homebrew)
+   xcode-select --install
+   ```
+3. **Python 3 (`python3`)**: Required for judging Python submissions.
+   ```bash
+   # Debian / Ubuntu
+   sudo apt install python3
+
+   # Arch Linux
+   sudo pacman -S python
+   ```
+
+---
+
+### Installation & Running
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone git@github.com:jsyph/JOJ2.git
+   cd JOJ2
+   ```
+
+2. **Run the Application**:
+   Use the included Maven wrapper (`./mvnw` on Linux/macOS, `mvnw.cmd` on Windows):
+   ```bash
+   ./mvnw clean javafx:run
+   ```
+
+> [!NOTE]
+> On the very first run, `Database.java` will automatically detect `joj.db.gz` and decompress it to `joj.db` within seconds. No manual database setup or SQL imports are required!
+
+---
+
+## 🗄️ Database Management
+
+The application uses an SQLite database (`joj.db`) containing problem descriptions, testcases, and historical submission runs:
+
+- **`joj.db.gz` (25 MB)**: Committed to Git as a compressed seed archive.
+
+- **`joj.db`**: Automatically extracted on startup. Ignored by Git so your local test submissions and runs never pollute your repository history.
+
+To manually re-compress the database at any time:
+```bash
+gzip -k -9 joj.db
+```
+
+---
+
+## 📄 License
+
+Developed for academic and competitive programming practice. Problem sets and reference solutions belong to their respective authors (CSES Problem Set).
